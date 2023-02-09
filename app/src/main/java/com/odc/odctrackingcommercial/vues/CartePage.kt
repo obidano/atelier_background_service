@@ -118,7 +118,7 @@ private fun CarteBody(
             verticalArrangement = Arrangement.Top
         ) {
             GoogleMap(cameraPositionState = cameraPosition, modifier = Modifier.fillMaxSize()) {
-               // PositionsMarkerList(allLocations)
+                PositionsMarkerList(allLocations)
                 ActivitesMarkerList(allActivites, user)
             }
 
