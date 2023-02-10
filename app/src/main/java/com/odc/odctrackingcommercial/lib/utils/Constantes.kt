@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object Constantes {
-    val BASE_URL: String="http://congocoop.com:3200"
+    val BASE_URL: String="https://odc.congocoop.com"
     const val DATABASE_NAME = "DB"
     const val TB_TODO_NAME = "tb_dodo"
     const val TB_ACTIVITES = "tb_activites"
