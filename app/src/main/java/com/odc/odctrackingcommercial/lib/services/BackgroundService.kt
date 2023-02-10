@@ -128,7 +128,7 @@ class BackgroundService : Service() {
             .setOngoing(true)
             .setContentTitle("Compose APP")
             .setSmallIcon(R.drawable.ic_notif)
-            .setContentText("Tracking position...")
+            .setContentText("Recherche des activités...")
             .setPriority(NotificationManager.IMPORTANCE_HIGH)
             .setContentIntent(pendingIntent)
             .build()

@@ -34,7 +34,7 @@ class SocketUtils @Inject constructor(@ApplicationContext val context: Context) 
             val chan = NotificationChannel(
                 CHANNEL_ID,
                 CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
             )
             //chan.lightColor = Color(0xFF00000)
             chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
@@ -63,7 +63,7 @@ class SocketUtils @Inject constructor(@ApplicationContext val context: Context) 
         val notif = NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle("Notification")
             .setContentText(msg)
-            .setSmallIcon(R.drawable.ic_message)
+            .setSmallIcon(R.drawable.ic_shop)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .build()
         Log.d("TAG", "showNotifs: msg")

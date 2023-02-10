@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -45,6 +46,16 @@ class MainActivity : ComponentActivity() {
             startService(mServiceIntent)
         }
     }
+
+    fun demarrerServiceForeground() {
+        val mServiceIntent = Intent(this, BackgroundService::class.java)
+        mServiceIntent.putExtra("IS_FOREGROUND", true)
+        if (!isMyServiceRunning(BackgroundService::class.java)) {
+            startForegroundService(mServiceIntent)
+        }
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +102,9 @@ class MainActivity : ComponentActivity() {
         broadcastIntent.setClass(this, MyReceiver::class.java)
         this.sendBroadcast(broadcastIntent)
         */
+        arreterServiceBackground()
+        Toast.makeText(this, "Lancement Foreground Service", Toast.LENGTH_LONG).show()
+        demarrerServiceForeground()
         super.onDestroy()
     }
 }
