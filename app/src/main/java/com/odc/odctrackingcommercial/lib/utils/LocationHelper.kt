@@ -32,11 +32,20 @@ import java.util.*
 import javax.inject.Inject
 
 @ActivityScoped
-class LocationHelper @Inject constructor(@ActivityContext private val context: Context,) {
+class LocationHelper @Inject constructor(@ActivityContext private val context: Context) {
     val client = LocationServices.getFusedLocationProviderClient(context)
     val userCoord = mutableStateOf<Location?>(null)
     val isGranted = mutableStateOf(false)
     val locationFlow = MutableSharedFlow<Location>()
+    private lateinit var locationRequest: LocationRequest
+
+
+    init {
+        val interval = 5 * 1000L
+        locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, interval).build()
+
+
+    }
 
     val locationCallback = object : LocationCallback() {
         override fun onLocationResult(l: LocationResult) {
@@ -50,12 +59,13 @@ class LocationHelper @Inject constructor(@ActivityContext private val context: C
     }
 
     @SuppressLint("MissingPermission")
-    private fun startLocationUpdates(activity:MainActivity) {
-        val interval = 10 * 1000L
-        val locationRequest =
-            LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, interval).build()
+    private fun startLocationUpdates(activity: MainActivity) {
         Log.d("", "startLocationUpdates: ")
+        openGpsService(activity)
+        client.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+    }
 
+    fun openGpsService(activity: MainActivity) {
         val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
         builder.setAlwaysShow(true)
 
@@ -91,9 +101,6 @@ class LocationHelper @Inject constructor(@ActivityContext private val context: C
                 }
             }
         }
-
-
-        client.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
     }
 
     @OptIn(DelicateCoroutinesApi::class)

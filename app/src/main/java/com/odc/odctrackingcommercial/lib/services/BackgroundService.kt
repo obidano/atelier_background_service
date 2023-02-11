@@ -103,7 +103,6 @@ class BackgroundService : Service() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun startMyOwnForeground() {
         val NOTIFICATION_CHANNEL_ID = "com.odc.notif"
         val channelName = "Background Service"
@@ -140,7 +139,6 @@ class BackgroundService : Service() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         isForeGround = intent?.getBooleanExtra("IS_FOREGROUND", false) ?: false
         Log.d("isForeGround", "onStartCommand: $isForeGround")
