@@ -32,7 +32,7 @@ fun HandleNotificationPermisssion( callback: () -> Unit) {
 
 
     LaunchedEffect(Unit) {
-        delay(1700L)
+        delay(1000L)
             permissionState.launchMultiplePermissionRequest()
     }
 }

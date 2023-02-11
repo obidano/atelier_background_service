@@ -27,6 +27,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.odc.odctrackingcommercial.lib.Navigation
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -59,8 +62,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arreterServiceBackground()
-        demarrerServiceBackground()
+        GlobalScope.launch {
+            delay(10000L)
+            arreterServiceBackground()
+            demarrerServiceBackground()
+        }
+
         setContent {
             ODCTrackingCommercialTheme {
                 // A surface container using the 'background' color from the theme
@@ -102,7 +109,7 @@ class MainActivity : ComponentActivity() {
         broadcastIntent.setClass(this, MyReceiver::class.java)
         this.sendBroadcast(broadcastIntent)
         */
-        arreterServiceBackground()
+       arreterServiceBackground()
         Toast.makeText(this, "Lancement Foreground Service", Toast.LENGTH_LONG).show()
         demarrerServiceForeground()
         super.onDestroy()
