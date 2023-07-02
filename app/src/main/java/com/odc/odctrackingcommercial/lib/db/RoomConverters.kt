@@ -16,6 +16,7 @@ class RoomConverters {
     fun convertStringToArticle(data: String): ArticlesModel {
         return Gson().fromJson(data, ArticlesModel::class.java)
     }
+
     @TypeConverter
     fun convertUserToString(data: UserModel): String {
         return Gson().toJson(data, UserModel::class.java)
@@ -27,12 +28,14 @@ class RoomConverters {
     }
 
     @TypeConverter
-    fun convertLocationToString(data: LocationModel): String {
+    fun convertLocationToString(data: LocationModel?): String? {
+        if (data == null) return null
         return Gson().toJson(data, LocationModel::class.java)
     }
 
     @TypeConverter
-    fun convertStringToLocation(data: String): LocationModel {
+    fun convertStringToLocation(data: String?): LocationModel? {
+        if (data == null) return null
         return Gson().fromJson(data, LocationModel::class.java)
     }
 }

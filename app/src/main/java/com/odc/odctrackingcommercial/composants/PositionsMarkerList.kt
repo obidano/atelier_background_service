@@ -26,10 +26,10 @@ fun PositionsMarkerList(allLocations: RequestState<List<LocationModel>>) {
 
 @Composable
 fun PositionMarker(maxPos: LocationModel, position: LocationModel) {
-    val pos = LatLng(position.latitude, position.longitude)
+    val pos = LatLng(position.latitude + 0.000008f, position.longitude+ 0.000008f)
     val isAlpha = if (position.id == maxPos.id) .8f else 0.5f
     val color =
-        if (position.id == maxPos.id) BitmapDescriptorFactory.HUE_RED
+        if (position.id == maxPos.id) BitmapDescriptorFactory.HUE_YELLOW
         else BitmapDescriptorFactory.HUE_BLUE
 
     val markerState = rememberMarkerState()

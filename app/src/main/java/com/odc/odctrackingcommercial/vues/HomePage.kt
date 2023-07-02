@@ -40,6 +40,9 @@ fun HomePage(navC: NavHostController, shareVM: SharedVueModel) {
     HandleLocalisationPermisssion(shareVM) {
         shareVM.locationH.checkLocationPermission( context as MainActivity)
     }
+    HandleNotificationPermisssion {
+
+    }
 
     Scaffold(
         bottomBar = { BottomNavigation(navCB) },

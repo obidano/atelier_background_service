@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.odc.odctrackingcommercial.ui.theme.ODCTrackingCommercialTheme
 import androidx.navigation.NavHostController
+import com.odc.odctrackingcommercial.MainActivity
 import com.odc.odctrackingcommercial.composants.*
 import com.odc.odctrackingcommercial.lib.utils.Categorie
 import com.odc.odctrackingcommercial.lib.utils.Constantes
@@ -106,6 +107,9 @@ fun AchatPage(
         }
     }
 
+    LaunchedEffect(Unit ){
+        shareVM.locationH.openGpsService(context as MainActivity)
+    }
 
     val fn = object : IAchatPage {
         override val saveDepenseActivite = { ->

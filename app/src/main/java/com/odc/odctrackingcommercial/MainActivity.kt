@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -26,6 +27,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.odc.odctrackingcommercial.lib.Navigation
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -46,8 +50,24 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    fun demarrerServiceForeground() {
+        val mServiceIntent = Intent(this, BackgroundService::class.java)
+        mServiceIntent.putExtra("IS_FOREGROUND", true)
+        if (!isMyServiceRunning(BackgroundService::class.java)) {
+            startForegroundService(mServiceIntent)
+        }
+    }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        GlobalScope.launch {
+            delay(10000L)
+            arreterServiceBackground()
+            demarrerServiceBackground()
+        }
+
         setContent {
             ODCTrackingCommercialTheme {
                 // A surface container using the 'background' color from the theme
@@ -89,6 +109,9 @@ class MainActivity : ComponentActivity() {
         broadcastIntent.setClass(this, MyReceiver::class.java)
         this.sendBroadcast(broadcastIntent)
         */
+       arreterServiceBackground()
+        Toast.makeText(this, "Lancement Foreground Service", Toast.LENGTH_LONG).show()
+        demarrerServiceForeground()
         super.onDestroy()
     }
 }

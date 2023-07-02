@@ -202,7 +202,7 @@ class SharedVueModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             var maxPos: LocationModel? = null
             val allPos = allLocations.value
-            if (allPos is RequestState.Success)
+            if (allPos is RequestState.Success && allPos.data.isNotEmpty())
                 maxPos = allPos.data.maxBy { it.id }
 
             val newData = data.copy(localisation = maxPos)

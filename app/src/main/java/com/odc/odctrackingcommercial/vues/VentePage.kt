@@ -26,6 +26,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.odc.odctrackingcommercial.ui.theme.ODCTrackingCommercialTheme
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.odc.odctrackingcommercial.MainActivity
 import com.odc.odctrackingcommercial.composants.*
 import com.odc.odctrackingcommercial.lib.navigation.HomeScreens
 import com.odc.odctrackingcommercial.lib.utils.Categorie
@@ -66,6 +67,10 @@ fun VentePage(
     val scope = rememberCoroutineScope()
     val snackbarHostState = scaffoldState.snackbarHostState
     val keyboardController = LocalSoftwareKeyboardController.current
+
+    LaunchedEffect(Unit ){
+        shareVM.locationH.openGpsService(context as MainActivity)
+    }
 
     val fn = object : IVentePage {
         override val saveRevenuActivite = { form: IFormVentePage ->

@@ -2,11 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-<!--    <uses-permission android:name="android.permission.INTERNET" />-->
-<!--    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
-<!--    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
-<!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />-->
-<!--    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />-->
+   <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".MyApplication"
@@ -20,14 +21,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
-      <!--  <meta-data
+        <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCGHUuX55CXg_lInBPXwCsWNhg3QF2ttWA" />-->
+            android:value="AIzaSyCGHUuX55CXg_lInBPXwCsWNhg3QF2ttWA" />
 
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.ODCTrackingCommercial">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +38,7 @@
             </intent-filter>
         </activity>
 
-       <!-- <receiver
+        <receiver
             android:name=".lib.broadcast.MyReceiver"
             android:enabled="true"
             android:exported="true">
@@ -45,13 +47,14 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
-        </receiver>-->
+        </receiver>
 
-       <!-- <service
+        <service
             android:name=".lib.services.BackgroundService"
             android:enabled="true"
             android:exported="true"
-            />-->
+            android:foregroundServiceType="location"
+            />
 
 
     </application>

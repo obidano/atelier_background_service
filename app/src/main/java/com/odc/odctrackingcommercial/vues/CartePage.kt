@@ -49,8 +49,8 @@ fun CartePage(
     val keyboardController = LocalSoftwareKeyboardController.current
 
     val allLocations = shareVM.allLocations.collectAsState().value
-    val allActivites=shareVM.allActivites.collectAsState().value
-    val user=shareVM.identifiant
+    val allActivites = shareVM.allActivites.collectAsState().value
+    val user = shareVM.identifiant
 
     val fn = object : ICartePage {
         override val naviguer = { route: String ->
@@ -61,11 +61,11 @@ fun CartePage(
             navC.popBackStack()
         }
     }
-  /*  HandleLocalisationPermisssion() {
-        shareVM.locationH.checkLocationPermission()
-    }*/
+    /*  HandleLocalisationPermisssion() {
+          shareVM.locationH.checkLocationPermission()
+      }*/
 
-    CarteBody(scaffoldState, fn, allLocations,allActivites, user)
+    CarteBody(scaffoldState, fn, allLocations, allActivites, user)
 
 }
 
@@ -80,7 +80,7 @@ private fun CarteBody(
     user: UserModel?,
 ) {
     val context = LocalContext.current
-  /*  val centerPosition = remember(allLocations) {
+    val centerPosition = remember(allLocations) {
         if (allLocations is RequestState.Success && allLocations.data.isNotEmpty()) {
             val a = allLocations.data.maxBy { it.id }
             LatLng(a.latitude, a.longitude)
@@ -88,20 +88,20 @@ private fun CarteBody(
             LatLng(-4.3308706, 15.30636)
 
         }
-    }*/
+    }
 
-  /*  val cameraPosition = rememberCameraPositionState {
+    val cameraPosition = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(centerPosition, 16f)
-    }*/
+    }
 
-   /* LaunchedEffect(centerPosition) {
+    LaunchedEffect(centerPosition) {
         cameraPosition.animate(
             update = CameraUpdateFactory.newCameraPosition(
                 CameraPosition(centerPosition, 16f, 0f, 0f)
             ),
             durationMs = 700
         )
-    }*/
+    }
 
 
 
@@ -117,10 +117,10 @@ private fun CarteBody(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-           /* GoogleMap(cameraPositionState = cameraPosition, modifier = Modifier.fillMaxSize()) {
-
-
-            }*/
+            GoogleMap(cameraPositionState = cameraPosition, modifier = Modifier.fillMaxSize()) {
+                PositionsMarkerList(allLocations)
+                ActivitesMarkerList(allActivites, user)
+            }
 
         }
     }
